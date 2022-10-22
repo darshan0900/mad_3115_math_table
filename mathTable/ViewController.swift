@@ -24,9 +24,8 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func onInsertPress(sender: UITapGestureRecognizer) {
-		if(isValid()){
-			tableView.reloadData()
-		}else{
+		tableView.reloadData()
+		if(!isValid()){
 			let alert = UIAlertController(title: "Oops", message: isEmpty() ? "Please enter a number" : "Please enter a valid Number", preferredStyle: .alert)
 			alert.addAction(UIAlertAction(title: "Try Again", style: .destructive))
 			present(alert, animated: true)
@@ -45,12 +44,10 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate{
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if(isEmpty()) {
-			return 0
-		} else if (!isValid()){
-			return 1
-		}else{
+		if (isValid()){
 			return 20
+		}else{
+			return 0
 		}
 	}
 	
